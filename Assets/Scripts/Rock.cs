@@ -57,18 +57,30 @@ public class Rock : MonoBehaviour {
 
 		yield return new WaitForSeconds (waitTimeBetweenWaypoint);
 
-		currentWaypointIndex++;
+        if (GameManager.instance.IsGameOver)
+        {
+            yield return null;
+        }
+        else
+        {
 
-		if ( currentWaypointIndex < waypoints.Length ){
-			StartCoroutine (Move(waypoints[currentWaypointIndex]));
-		} else {
+            currentWaypointIndex++;
 
-			if ( isRepeating ){
-				currentWaypointIndex = 0;
-				StartCoroutine (Move(waypoints[currentWaypointIndex]));
-			}
+            if (currentWaypointIndex < waypoints.Length)
+            {
+                StartCoroutine(Move(waypoints[currentWaypointIndex]));
+            }
+            else
+            {
 
-		}
+                if (isRepeating)
+                {
+                    currentWaypointIndex = 0;
+                    StartCoroutine(Move(waypoints[currentWaypointIndex]));
+                }
+
+            }
+        }
 
 	}
 }

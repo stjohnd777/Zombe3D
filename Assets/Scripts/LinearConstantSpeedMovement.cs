@@ -18,6 +18,10 @@ public class LinearConstantSpeedMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (GameManager.instance.IsGameOver || !GameManager.instance.IsPlayerActive) {
+			return;
+		}
+
 		transform.localPosition = new Vector3(transform.localPosition.x +Time.deltaTime*speed, transform.localPosition.y, transform.localPosition.z);
 
 		if ( transform.localPosition.x > leftLimit.localPosition.x){
